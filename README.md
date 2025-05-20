@@ -44,4 +44,4 @@ The image should add itself automatically, but if it doesn’t, add it manually 
 
 ---
 
-Enjoy the chaos! 😈
+Enjoy the chaos! 
