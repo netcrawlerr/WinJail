@@ -18,6 +18,8 @@ namespace WinJail
         private static int winWidth = 550;
         private static int winHeight = (int)(Screen.PrimaryScreen.Bounds.Height * 0.5);
 
+        private Timer phantomCursorTimer;
+
         public MainForm()
         {
             InitializeComponent();
@@ -61,6 +63,14 @@ namespace WinJail
 
         private void InitializeUI()
         {
+            phantomCursorTimer = new Timer();
+            phantomCursorTimer.Interval = 100;
+            phantomCursorTimer.Tick += (s, e) =>
+            {
+                Cursor.Position = new Point(Cursor.Position.X + random.Next(-40, 40), Cursor.Position.Y + random.Next(-40, 40));
+            };
+            phantomCursorTimer.Start();
+
             this.Width = winWidth;
             this.Height = winHeight;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
