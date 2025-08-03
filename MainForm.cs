@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace WinJail
 {
@@ -102,6 +103,18 @@ namespace WinJail
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            e.Cancel = true;
+
+            this.Opacity = 0.3;
+            Timer flickerTimer = new Timer();
+            flickerTimer.Interval = 350;
+            flickerTimer.Tick += (s, args) =>
+            {
+                this.Opacity = 1.0;
+                flickerTimer.Stop();
+            };
+            flickerTimer.Start();
+
             string msg = messages[random.Next(messages.Length)];
             MessageBox.Show(msg, "WinJail says...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
